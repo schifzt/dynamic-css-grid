@@ -8,17 +8,17 @@ function countRow(elm) {
 	return ((grid_layout.match(/px/g) || []).length);
 }
 
-// [row_top, col_left, row_bottom, col_right]
+// return Array(top, left, bottom, right)
 function gridAreaToArray(pane) {
 	let s = getComputedStyle(pane.elm).gridArea;
-	return Array(s[0], s[4], s[8], s[12]).map(str => parseInt(str, 10));
+	return (s.split(" / ").map(str => parseInt(str, 10)));
 }
 
-function arrayToGridArea(arr) {
+function intToGridArea(top, left, bottom, right) {
 	return (
-		arr[0] + " / " +
-		arr[1] + " / " +
-		arr[2] + " / " +
-		arr[3]
+		top + " / " +
+		left + " / " +
+		bottom + " / " +
+		right
 	)
 }

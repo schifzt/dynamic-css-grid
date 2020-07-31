@@ -1,15 +1,12 @@
 .pane-element{
-	border:solid 1px green;
-	width: 99%;
-	height: 99%;
-	margin: 1px;
+	border:solid 5px green;
+	width: 100%;
+	height: 100%;
+	/* margin: 0px; */
 }
 
 #container{
-	border:solid 1px black;
 	width: 800px;
 	height: 600px;
 	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: 1fr;
 }

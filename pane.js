@@ -4,108 +4,73 @@ class Pane {
 		this.prev = null;
 		this.next = null;
 		if (isHead) {
-			// Create head and the 1st paneat the same time
+			// Create the 1st pane when head is defined.
 			this._insertNext();
-			this.next.elm.style.gridColumn = "1 / 2";
-			this.next.elm.style.gridRow = "1 / 2";
+			this.next.elm.style.gridColumn = "1 / " + (2 ** max_col_split + 1);
+			this.next.elm.style.gridRow = "1 / " + (2 ** max_row_split + 1);
 		}
 	}
 
+	highlightOn() {
+		this.elm.style.backgroundColor = "#E7F1ED";
+	}
+	highlightOff() {
+		this.elm.style.backgroundColor = "#FFFFFF";
+	}
+
+	moveForward() {
+		if (this.next !== null) {
+			return (this.next);
+		} else {
+			return (head.next);
+		}
+	}
+
+	moveBackward() {
+		if (this.prev !== null) {
+			return (this.prev);
+		} else { }
+	}
+
 	splitColumn() {
-		// Add a new column to grid
-		let n_col = countColumn(container);
-		container.style.gridTemplateColumns = "1fr ".repeat(n_col) + "1fr";
+		// Fetch line numbers of a selected pane
+		let ga = gridAreaToArray(this);
+		let top = ga[0];
+		let left = ga[1];
+		let bottom = ga[2];
+		let right = ga[3];
 
-		// Create a new pane
-		this._insertNext();
+		if (right - left > 1) {
+			// Create a new pane
+			this._insertNext();
 
-		// Allocate a new pane to grid
-		let selected_ga = gridAreaToArray(this);
-		let gridarea = Array(selected_ga[0], selected_ga[1] + 1, selected_ga[2], selected_ga[3] + 1);
-		this.next.elm.style.gridArea = arrayToGridArea(gridarea);
-
-		// Re-allocate panes to grid
-		let pane = this.next.next;
-		while (true) {
-			if (pane === null) {
-				break;
-			}
-
-			let ga = gridAreaToArray(pane);
-			console.log(ga);
-			// if a pane is in the same row with the selected pane,
-			if (ga[0] == selected_ga[0] && ga[2] == selected_ga[2]) {
-				let new_ga = Array(ga[0], ga[1] + 1, ga[2], ga[3] + 1);
-				pane.elm.style.gridArea = arrayToGridArea(new_ga);
-				console.log("hi!");
-				console.log(new_ga);
-			} else {
-				let new_ga = Array(ga[0], ga[1], ga[2], ga[3] + 1);
-				pane.elm.style.gridArea = arrayToGridArea(new_ga);
-				console.log("yo!");
-				console.log(new_ga);
-			}
-
-			pane = pane.next;
+			// Allocate a new pane & Re-allocate a selected pane to grid
+			let mid = (left + right) / 2;
+			this.elm.style.gridArea = intToGridArea(top, left, bottom, mid);
+			this.next.elm.style.gridArea = intToGridArea(top, mid, bottom, right);
 		}
 	}
 
 	splitRow() {
-		let n_row = countRow(container);
-		container.style.gridTemplateRows = "1fr ".repeat(n_row) + "1fr";
+		// Fetch line numbers of a selected pane
+		let ga = gridAreaToArray(this);
+		let top = ga[0];
+		let left = ga[1];
+		let bottom = ga[2];
+		let right = ga[3];
 
-		this._insertNext();
+		if (bottom - top > 1) {
+			// Create a new pane
+			this._insertNext();
 
-
-		let selected_ga = gridAreaToArray(this);
-		let ga = Array(selected_ga[0] + 1, selected_ga[1], selected_ga[2] + 1, selected_ga[3]);
-		this.next.elm.style.gridArea = arrayToGridArea(ga);
-		console.log(selected_ga);
-		console.log(ga);
-
-		let pane = this.next.next;
-		while (true) {
-			if (pane.next === null) {
-				break;
-			}
-
-			let ga = gridAreaToArray(pane);
-			console.log(ga);
-			// if a pane is in the same column with the selected pane,
-			if (ga[1] == selected_ga[1] && ga[3] == selected_ga[3]) {
-				let new_ga = Array(ga[0] + 1, ga[1], ga[2] + 1, ga[3]);
-				pane.elm.style.gridArea = arrayToGridArea(new_ga);
-				console.log("hi!");
-				console.log(new_ga);
-			} else {
-				let new_ga = Array(ga[0], ga[1], ga[2] + 1, ga[3]);
-				pane.elm.style.gridArea = arrayToGridArea(new_ga);
-				console.log("yo!");
-				console.log(new_ga);
-			}
-
-			pane = pane.next;
+			// Allocate a new pane & Re-allocate a selected pane to grid
+			let mid = (top + bottom) / 2;
+			this.elm.style.gridArea = intToGridArea(top, left, mid, right);
+			this.next.elm.style.gridArea = intToGridArea(mid, left, bottom, right);
 		}
-
-		// let col_linenum = parseInt(getComputedStyle(this.elm).gridColumn[0], 10);
-		// let row_linenum = parseInt(getComputedStyle(this.elm).gridRow[0], 10);
-
-		// let pane = this.next;
-		// let inc = 1;
-		// while (true) {
-		// 	pane.elm.style.gridColumn = col_linenum + " / " + (col_linenum + 1);
-		// 	pane.elm.style.gridRow = (row_linenum + inc) + " / " + (row_linenum + inc + 1);
-		// 	if (pane.next === null) {
-		// 		break;
-		// 	}
-		// 	++inc;
-		// 	pane = pane.next;
-		// }
 	}
-
 	_addCanvas() {
 		this.elm = document.createElement("canvas");
-		// this.elm.className = "pane-element";
 		this.elm.classList.add("pane-element");
 		document.getElementById("container").appendChild(this.elm);
 	}
@@ -123,7 +88,7 @@ class Pane {
 	}
 
 	_deleteThis() {
-		// if head => ignore
+		// if this == head, ignore
 		if (this.prev === null) {
 			return;
 		}
