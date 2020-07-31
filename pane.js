@@ -28,18 +28,14 @@ class Pane {
 	}
 
 	moveBackward() {
-		if (this.prev !== null) {
-			return (this.prev);
-		} else { }
+		// if (this.prev !== null) {
+		// 	return (this.prev);
+		// } else { }
 	}
 
 	splitColumn() {
 		// Fetch line numbers of a selected pane
-		let ga = gridAreaToArray(this);
-		let top = ga[0];
-		let left = ga[1];
-		let bottom = ga[2];
-		let right = ga[3];
+		let [top, left, bottom, right] = gridAreaToArray(this);
 
 		if (right - left > 1) {
 			// Create a new pane
@@ -53,19 +49,21 @@ class Pane {
 	}
 
 	splitRow() {
-		// Fetch line numbers of a selected pane
 		let [top, left, bottom, right] = gridAreaToArray(this);
-
 		if (bottom - top > 1) {
-			// Create a new pane
 			this._insertNext();
-
-			// Allocate a new pane & Re-allocate a selected pane to grid
 			let mid = (top + bottom) / 2;
 			this.elm.style.gridArea = intToGridArea(top, left, mid, right);
 			this.next.elm.style.gridArea = intToGridArea(mid, left, bottom, right);
 		}
 	}
+
+	delete() {
+		let [top, left, bottom, right] = gridAreaToArray(this);
+
+	}
+
+
 	_addCanvas() {
 		this.elm = document.createElement("canvas");
 		this.elm.classList.add("pane");
