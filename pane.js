@@ -8,11 +8,12 @@ class Pane {
 			this._insertNext();
 			this.next.elm.style.gridColumn = "1 / " + (2 ** max_col_split + 1);
 			this.next.elm.style.gridRow = "1 / " + (2 ** max_row_split + 1);
+			this.next.elm.style.backgroundColor = "#dee8e4";
 		}
 	}
 
 	highlightOn() {
-		this.elm.style.backgroundColor = "#E7F1ED";
+		this.elm.style.backgroundColor = "#dee8e4";
 	}
 	highlightOff() {
 		this.elm.style.backgroundColor = "#FFFFFF";
@@ -53,11 +54,7 @@ class Pane {
 
 	splitRow() {
 		// Fetch line numbers of a selected pane
-		let ga = gridAreaToArray(this);
-		let top = ga[0];
-		let left = ga[1];
-		let bottom = ga[2];
-		let right = ga[3];
+		let [top, left, bottom, right] = gridAreaToArray(this);
 
 		if (bottom - top > 1) {
 			// Create a new pane
@@ -71,7 +68,7 @@ class Pane {
 	}
 	_addCanvas() {
 		this.elm = document.createElement("canvas");
-		this.elm.classList.add("pane-element");
+		this.elm.classList.add("pane");
 		document.getElementById("container").appendChild(this.elm);
 	}
 
