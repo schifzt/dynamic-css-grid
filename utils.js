@@ -1,14 +1,7 @@
-function countColumn(elm) {
-	let grid_layout = getComputedStyle(elm).gridTemplateColumns;
-	return ((grid_layout.match(/px/g) || []).length);
-}
-
-function countRow(elm) {
-	let grid_layout = getComputedStyle(elm).gridTemplateRows;
-	return ((grid_layout.match(/px/g) || []).length);
-}
-
-// return Array(top, left, bottom, right)
+/*
+input: pane
+output: array of line numbers of a input pane, i.e. [top, left, bottom, right]
+ */
 function gridAreaToArray(pane) {
 	let s = getComputedStyle(pane.elm).gridArea;
 	return (s.split(" / ").map(str => parseInt(str, 10)));
