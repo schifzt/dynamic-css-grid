@@ -2,6 +2,8 @@ html, body {
 	margin: 0;
 	height: 100%;
 	overflow: hidden;
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 #container{
 	width: 100vw;
@@ -10,28 +12,31 @@ html, body {
 	margin: 0 auto;
  	/* box-sizing: border-box; */
 	grid-gap: 0px;
-	font-size: 25.5vw;
+	/* font-size: 8vw; */
 }
 
 .pane{
-	border:solid 2px green;
+	border:solid 2px #2580DC;
+	font-family: "Orbitron", sans-serif, "Hiragino Kaku Gothic ProN";
 	width: 100%;
 	height: 100%;
 	box-sizing: border-box;
-	font-family: "Hiragino Kaku Gothic ProN";
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	z-index: 1;
 }
 
 #overlay{
+	font-family: 'Noto Sans JP', sans-serif;
 	width: 100vw;
 	height: 100vh;
 	position: absolute;
 	display: grid;
 	justify-content: center;
+	/* z-index: 0; */
 	z-index: 2147483647;
-	margin-top: 2em;
+	margin-top: 1em;
 	font-size: 2vw;
 	text-align: left;
 }

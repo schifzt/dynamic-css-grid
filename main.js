@@ -1,8 +1,8 @@
 // Parameters
 const pane_bg = "#FFFFFF";
-const pane_bg_highlight = "#dee8e4";
-const max_col_split = 6;
-const max_row_split = 6;
+const pane_bg_highlight = "#bce1df";
+const log2_maxcol = 6;
+const log2_maxrow = 6;
 
 var overlay_opacity = 1;
 const gamma = 0.95;
@@ -11,8 +11,8 @@ document.getElementById("overlay").style.opacity = overlay_opacity;
 // ----------------------------------
 
 const container = document.getElementById("container");
-container.style.gridTemplateColumns = "1fr ".repeat(2 ** max_col_split);
-container.style.gridTemplateRows = "1fr ".repeat(2 ** max_row_split);
+container.style.gridTemplateColumns = "1fr ".repeat(2 ** log2_maxcol);
+container.style.gridTemplateRows = "1fr ".repeat(2 ** log2_maxrow);
 
 const head = new Pane(isHead = true);
 var itr = head.next;
@@ -20,6 +20,7 @@ var itr = head.next;
 // Catch key-binding
 var caughtCtrl = false;
 var caughtPrefix = false;
+
 window.addEventListener("keydown", function (e) {
 	caughtCtrl = e.ctrlKey;
 });
@@ -45,3 +46,4 @@ window.addEventListener("keypress", function (e) {
 		caughtPrefix = false;
 	}
 });
+

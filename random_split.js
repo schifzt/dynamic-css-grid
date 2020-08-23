@@ -1,21 +1,20 @@
-const count_max = 100;
-const stride = 10;
-const delay_ms = 80;
-
+const count_max = 500;
+const delay_ms = 60;
 var command_count = 0;
+
 random_split = function () {
     setTimeout(function () {
         ++command_count;
 
-        rint = parseInt(stride * Math.random(), 10);
-        if (rint <= stride * 0.15) {
+        rint = parseInt(100 * Math.random(), 10);
+        if (rint <= 15) {
             // 15%
             itr.splitRow();
-        } else if (rint <= stride * 0.3) {
-            // 30%
+        } else if (rint <= 30) {
+            // 15%
             itr.splitColumn();
         } else {
-            // 60%
+            // 70%
             itr.highlightOff();
             itr = itr.moveForward();
             itr.highlightOn();
