@@ -1,3 +1,4 @@
+
 /*
 Description:
 	Each pane constitutes doubly linked list.
@@ -119,4 +120,3 @@ class Pane {
 		lowerOpacity();
 	}
 }
-
