@@ -7,7 +7,7 @@ Dynamically split row and column with CSS Grid. [The demo is here.](https://schi
 + `:v`      : split window vertically 
 + `:h`      : split window horizontally 
 + `:r`      : split window at random 
-+ `Ctrl`+`w`: move to the nest window
++ `Ctrl`+`w`: move to the next window
 
 ## LICENSE
 MIT
