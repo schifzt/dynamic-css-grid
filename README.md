@@ -1,8 +1,10 @@
-# JavaScript tmux pane
-JavaScript snipet to operate a HTML element in a tmux manner
-
-<!-- [online demo](...) -->
+# Dynamic CSS Grid
+dynamically split row and column by using CSS Grid
+<!-- [Online demo](...) -->
+![screenshot](./asset/screenshot.gif)
 
 ## key-binding
-+ `Ctrl`+`b` `"` split a HTML element horizontally 
-+ `Ctrl`+`b` `%` split a HTML element vertically
++ `:v`      : split window vertically 
++ `:h`      : split window horizontally 
++ `:r`      : split window at random 
++ `Ctrl`+`w`: move to the nest window

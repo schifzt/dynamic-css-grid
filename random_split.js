@@ -1,5 +1,5 @@
-const count_max = 500;
-const delay_ms = 60;
+const count_max = 450;
+const delay_ms = 30;
 var command_count = 0;
 
 random_split = function () {
