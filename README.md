@@ -1,6 +1,6 @@
 # Dynamic CSS Grid
-dynamically split row and column by using CSS Grid
-<!-- [Online demo](...) -->
+dynamically split row and column with CSS Grid
+[online demo](...)
 ![screenshot](./asset/screenshot.gif)
 
 ## key-binding
