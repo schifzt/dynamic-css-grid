@@ -8,3 +8,6 @@ dynamically split row and column with CSS Grid
 + `:h`      : split window horizontally 
 + `:r`      : split window at random 
 + `Ctrl`+`w`: move to the nest window
+
+## LICENSE
+MIT
