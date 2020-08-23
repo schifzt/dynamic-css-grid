@@ -1,4 +1,4 @@
-const count_max = 450;
+const count_max = 150;
 const delay_ms = 30;
 var command_count = 0;
 
